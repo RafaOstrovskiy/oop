@@ -40,15 +40,17 @@ class Hamburger extends Food {
     }
 }
 class Salad extends Food {
+    static defaultWeight = 100;
     constructor(meal, weight = 100) {
         super(meal);
         this._weight = weight;
         if (this._weight <= 0) {
             throw new Error('Incorrect weight of salad');
         }
-        this._price = meal.price * this._weight / 100;
-        this._calories = meal.calories * this._weight / 100;
+        this._price = meal.price * this._weight / Salad.defaultWeight;
+        this._calories = meal.calories * this._weight / Salad.defaultWeight;
     }
+
     get Weight () {
         return this._weight;
     }
@@ -108,26 +110,26 @@ class Order {
 
 // Test
 
-// const smallHamWithPotato = new Hamburger(SMALL, POTATO);
-// console.log(smallHamWithPotato.Type); //Small Hamburger with potato
-// console.log(smallHamWithPotato.Size); // small
-// console.log(smallHamWithPotato.Stuffing); // potato
-//
-// const olivierSalad150 = new Salad(OLIVIER, 150);
-// console.log(olivierSalad150.Price) // 75
-// console.log(olivierSalad150.Weight) // 150
-//
-// const coffeeDrink = new Drinks(COFFEE)
-// console.log(coffeeDrink.Calories) // 20
-//
-// const orderTest = new Order()
-// orderTest.add(smallHamWithPotato, 2);
-// orderTest.add(olivierSalad150, 3);
-// orderTest.add(coffeeDrink);
-// console.log(orderTest.OrderList); // [Hamburger, Hamburger, Salad, Salad, Salad, Drinks]
-// orderTest.removeByName(olivierSalad150, 2)
-// console.log(orderTest.OrderList); // [Hamburger, Hamburger, Salad, Drinks]
-// // orderTest.pay();
-// // orderTest.removeByIndex(3) // error
-// console.log(orderTest.CalculateTotalPrice) // 285
-// console.log(orderTest.CalculateTotalCalories) // 200
+const smallHamWithPotato = new Hamburger(SMALL, POTATO);
+console.log(smallHamWithPotato.Type); //Small Hamburger with potato
+console.log(smallHamWithPotato.Size); // small
+console.log(smallHamWithPotato.Stuffing); // potato
+
+const olivierSalad150 = new Salad(OLIVIER, 150);
+console.log(olivierSalad150.Price) // 75
+console.log(olivierSalad150.Weight) // 150
+
+const coffeeDrink = new Drinks(COFFEE)
+console.log(coffeeDrink.Calories) // 20
+
+const orderTest = new Order()
+orderTest.add(smallHamWithPotato, 2);
+orderTest.add(olivierSalad150, 3);
+orderTest.add(coffeeDrink);
+console.log(orderTest.OrderList); // [Hamburger, Hamburger, Salad, Salad, Salad, Drinks]
+orderTest.removeByName(olivierSalad150, 2)
+console.log(orderTest.OrderList); // [Hamburger, Hamburger, Salad, Drinks]
+// orderTest.pay();
+// orderTest.removeByIndex(3) // error
+console.log(orderTest.CalculateTotalPrice) // 285
+console.log(orderTest.CalculateTotalCalories) // 200
